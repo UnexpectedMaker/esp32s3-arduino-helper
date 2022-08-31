@@ -66,7 +66,7 @@ class UMS3 {
 
     void writePixel() {
       setPixelPower(true);
-      while (micros() < next_rmt_write) {
+      while (micros() - next_rmt_write < 350) {
         yield();
       }
       int index = 0;
@@ -88,7 +88,7 @@ class UMS3 {
         }
       }
       rmtWrite(rmt, rmt_data, 3 * 8);
-      next_rmt_write = micros() + 350;
+      next_rmt_write = micros();
     }
 
     static uint32_t color(uint8_t r, uint8_t g, uint8_t b) {
