@@ -8,6 +8,10 @@ void setup() {
 
   // Brightness is 0-255. We set it to 1/3 brightness here
   ums3.setPixelBrightness(255 / 3);
+
+  // Enable the power to the RGB LED.
+  // Off by default so it doesn't use current when the LED is not required.
+  ums3.setPixelPower(true);
 }
 
 int color = 0;
