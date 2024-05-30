@@ -1,5 +1,5 @@
 // Updated for ESP32 Arduino Core 3.0.0 support
-// May 30, 2024 - Seon Rozenblum (Unexpected Maker)
+// May 31, 2024 - Seon Rozenblum (Unexpected Maker)
 
 #ifndef _UMS3_H
 #define _UMS3_H
@@ -16,6 +16,7 @@
 #define ALS_ADC_CHANNEL ADC1_GPIO4_CHANNEL
 #define VBAT_ADC_PIN 2
 #define ALS_ADC_PIN 4
+#else
 #error                                                                         \
     "The board you have selected is not compatible with the UMS3 helper library"
 #endif
@@ -169,9 +170,16 @@ public:
 
 #if defined(ARDUINO_FEATHERS3)
   float getLightSensorVoltage() {
+#if ESP_ARDUINO_VERSION_MAJOR < 3
     uint32_t raw = adc1_get_raw(ALS_ADC_CHANNEL);
     uint32_t millivolts = esp_adc_cal_raw_to_voltage(raw, &adc_cal);
-    return millivolts / 1000.0f;
+#else
+    uint32_t millivolts = analogReadMilliVolts(VBAT_ADC_PIN);
+#endif
+    const uint32_t upper_divider = 442;
+    const uint32_t lower_divider = 160;
+    return (float)(upper_divider + lower_divider) / lower_divider / 1000 *
+           millivolts;
   }
 #endif
 
