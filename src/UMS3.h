@@ -174,7 +174,7 @@ public:
     uint32_t raw = adc1_get_raw(ALS_ADC_CHANNEL);
     uint32_t millivolts = esp_adc_cal_raw_to_voltage(raw, &adc_cal);
 #else
-    uint32_t millivolts = analogReadMilliVolts(VBAT_ADC_PIN);
+    uint32_t millivolts = analogReadMilliVolts(ALS_ADC_CHANNEL);
 #endif
     const uint32_t upper_divider = 442;
     const uint32_t lower_divider = 160;
