@@ -1,5 +1,5 @@
 // Updated for ESP32 Arduino Core 3.0.0 support
-// May 31, 2024 - Seon Rozenblum (Unexpected Maker)
+// Oct 16, 2024 - Seon Rozenblum (Unexpected Maker)
 
 #ifndef _UMS3_H
 #define _UMS3_H
@@ -173,13 +173,11 @@ public:
 #if ESP_ARDUINO_VERSION_MAJOR < 3
     uint32_t raw = adc1_get_raw(ALS_ADC_CHANNEL);
     uint32_t millivolts = esp_adc_cal_raw_to_voltage(raw, &adc_cal);
+    return (float)millivolts / 1000.0f;
 #else
-    uint32_t millivolts = analogReadMilliVolts(VBAT_ADC_PIN);
+    uint32_t millivolts = analogReadMilliVolts(ALS_ADC_PIN);
+    return (float)(millivolts);
 #endif
-    const uint32_t upper_divider = 442;
-    const uint32_t lower_divider = 160;
-    return (float)(upper_divider + lower_divider) / lower_divider / 1000 *
-           millivolts;
   }
 #endif
 
