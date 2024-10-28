@@ -53,7 +53,7 @@ public:
 
 #if defined(ARDUINO_FEATHERS3)
 #if ESP_ARDUINO_VERSION_MAJOR < 3
-    adc1_config_channel_atten(ALS_ADC_CHANNEL, ADC_ATTEN_DB_11);
+    adc1_config_channel_atten(ALS_ADC_CHANNEL, ADC_ATTEN_DB_12);
 #else
     analogSetPinAttenuation(ALS_ADC_PIN, ADC_11db);
 #endif
