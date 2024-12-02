@@ -21,6 +21,10 @@ void setLDO2Power(bool on);
 // Set neopixel power on or off (On ProS3 and Feather it sets LDO2 on)
 void setPixelPower(bool on);
 
+// Set 7x7 RGB LED matrix power on or off
+// Only available on the FeatherS3 Neo
+void setMatrixPower(bool on);
+
 // Set neopixel color
 void setPixelColor(uint8_t r, uint8_t g, uint8_t b);
 void setPixelColor(uint32_t rgb);
@@ -34,18 +38,24 @@ static uint32_t color(uint8_t r, uint8_t g, uint8_t b);
 // Convert a color wheel angle (0-255) to a 32bit rgb color
 static uint32_t colorWheel(uint8_t pos);
 
-// Set the blue LED on or off (FeatherS3 only)
+// Set the blue LED on or off
+// Only available on the FeatherS3 and FeatherS3 Neo
 void setBlueLED(bool on);
 
-// Toggle the blue LED (FeatherS3 only)
+// Toggle the blue LED
+// Only available on the FeatherS3 and FeatherS3 Neo
 void toggleBlueLED();
 
 // Get the battery voltage in volts
+// On the OMGS3, this function gets the voltage from the MAX17048 otherwise, it reads it from the ADC pin.
+// Not available on the NanoS3 
 float getBatteryVoltage();
 
 // Get the light sensor in volts (0-3.3)
+// Only available on the FeatherS3 and FeatherS3 Neo
 float getLightSensorVoltage();
 
 // Detect if VBUS (USB power) is present
+// Not available on the NanoS3 
 bool getVbusPresent();
 ```

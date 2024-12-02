@@ -2,19 +2,24 @@
 
 UMS3 ums3;
 
-void setup() {
-  Serial.begin(115200);
+void setup()
+{
+	Serial.begin(115200);
 
-  // Initialize all board peripherals, call this first
-  ums3.begin();
+	// Delay to allow native USB to kick in to get serial output
+	delay(2000);
+
+	// Initialize all board peripherals, call this first
+	ums3.begin();
 }
 
-void loop() {
-  // Light sensor voltage goes up to about 3.3v
-  float light = ums3.getLightSensorVoltage();
+void loop()
+{
+	// Light sensor voltage goes up to about 3.3v
+	float light = ums3.getLightSensorVoltage();
 
-  // View this with the arduino serial plotter (in the tools menu)
-  Serial.println(light);
+	// View this with the arduino serial plotter (in the tools menu)
+	Serial.println(light);
 
-  delay(50);
+	delay(50);
 }
